@@ -1,2 +1,3 @@
-# VueJS_Firebase_NuxtJS
+# VueJS Firebase NuxtJS
+
 Vue.js + Firebase + Nuxt.js course from scratch.
