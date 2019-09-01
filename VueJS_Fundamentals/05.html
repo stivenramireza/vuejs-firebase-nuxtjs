@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computed properties exercise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" class="container">
+
+        <h3>{{ message }}</h3>
+        <h3>Inverted: {{ inverted }}</h3>
+        <input type="text" class="form-control" v-model="message">
+        <hr />
+        <button class="btn btn-primary" @click="counter++">+</button>
+        <button class="btn btn-danger" @click="counter--">-</button>
+        <h3>{{ counter }}</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" :style="{'width': counter + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" :class="color">{{  counter }}%</div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="05.js"></script>
+</body>
+</html>
