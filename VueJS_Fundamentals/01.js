@@ -1,7 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-        title: 'Hello world with Vue',
+        title: 'V-if and V-for exercise',
         fruits: [
             { name: 'Pear', quantity: 10 },
             { name: 'Apple', quantity: 0 },

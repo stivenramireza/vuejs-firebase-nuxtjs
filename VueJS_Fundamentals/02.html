@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>V-if and V-for exercise</title>
+    <title>V-model and Methods exercise</title>
 </head>
 <body>
     <div id="app">
-        <h1> {{title}} </h1>
+        <h1> {{ title }} </h1>
+
+        <input type="text" v-model="newFruit">
+        <button @click="addFruit">Add</button>
 
         <ul>
             <li v-for="fruit of fruits">
@@ -19,6 +22,6 @@
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="01.js"></script>
+    <script src="02.js"></script>
 </body>
 </html>
