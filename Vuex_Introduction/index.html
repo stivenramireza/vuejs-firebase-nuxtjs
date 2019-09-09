@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vuex</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+</head>
+<body>
+    <div id="app">
+        <Parent></Parent>
+    </div>
+
+    <script>
+        Vue.component('Parent', {
+            template: //html
+            `
+            <div>
+                <h3>Number: {{ number }}</h3>
+                <Child></Child>
+            </div>
+            `,
+            computed: {
+                ...Vuex.mapState(['number'])
+            }
+        })
+
+        Vue.component('Child', {
+            template: //html
+            `
+            <div>
+                <button @click="increase">+</button>
+                <button @click="decrease(2)">-</button>
+                <button @click="getCourses">Get Courses</button>
+                <h3>Number: {{ number }}</h3>
+                <ul v-for="item of courses">
+                    <li>{{ item.name }}</li>
+                </ul>
+            </div>
+            `,
+            computed: {
+                ...Vuex.mapState(['number', 'courses'])
+            },
+            methods: {
+                ...Vuex.mapMutations(['increase', 'decrease']),
+                ...Vuex.mapActions(['getCourses'])
+            }
+        })
+
+        const store = new Vuex.Store({
+            state: {
+                number: 0,
+                courses: []
+            },
+            mutations: {
+                increase(state) {
+                    state.number ++
+                },
+                decrease(state, n) {
+                    state.number -= n
+                },
+                fillCourses(state, filledCourses) {
+                    state.courses = filledCourses
+                }
+            },
+            actions: {
+                getCourses: async function ({ commit }) {
+                    const data = await fetch('courses.json')
+                    const courses = await data.json()
+                    commit('fillCourses', courses)
+                }
+            }
+        })
+
+        new Vue({
+            el: '#app',
+            store: store
+        })
+    </script>
+</body>
+</html>
