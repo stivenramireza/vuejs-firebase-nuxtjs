@@ -1,7 +1,7 @@
-# VueJS + Firebase + NuxtJS
+# Vue.js + Firebase + Node.js
 
-Vue.js + Firebase + Nuxt.js course from scratch.
+Vue.js + Firebase + Node.js course from scratch.
 
 <p align="center">
-<img src="https://i.udemycdn.com/course/240x135/1594618_979b_7.jpg">
+<img src="https://1.bp.blogspot.com/-tQjFWjhoi8g/XTlFvSQ16XI/AAAAAAAAWj4/up-yVQ3rSBAcMID0ZcYLYLOhaK3kAIYgQCLcBGAs/s640/2205298_d754_4.jpg">
 </p>
