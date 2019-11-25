@@ -2,7 +2,7 @@
     <div>
         <h1>Update</h1>
         {{ id }} - {{ task }}
-        <form>
+        <form @submit.prevent="updateTask(task)">
             <input type="text" v-model="task.name">
             <button>Update</button>
         </form>
@@ -19,7 +19,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getTask'])
+        ...mapActions(['getTask', 'updateTask'])
     },
     created(){
         this.getTask(this.id)
