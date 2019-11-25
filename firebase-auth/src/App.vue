@@ -1,12 +1,28 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link :to="{name:'inicio'}" v-if="existeUsuario">Inicio</router-link> |
+      <router-link :to="{name:'registro'}" v-if="!existeUsuario">Registro</router-link> |
+      <router-link :to="{name:'ingreso'}" v-if="!existeUsuario">Ingreso</router-link> |
+      <a @click="cerrarSesion" v-if="existeUsuario">Cerrar Sesión</a>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+  name: 'App',
+  methods:{
+    ...mapActions(['cerrarSesion'])
+  },
+  computed:{
+    ...mapGetters(['existeUsuario'])
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -16,7 +32,6 @@
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }
