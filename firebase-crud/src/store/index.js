@@ -49,8 +49,14 @@ export default new Vuex.Store({
       .then(() => {
         router.push({ name: 'home' })
       })
+    },
+    addTask({commit}, name){
+      db.collection('tasks').add({
+        name: name
+      })
+      .then(doc => {
+        router.push({ name: 'home' })
+      })
     }
-  },
-  modules: {
   }
 })

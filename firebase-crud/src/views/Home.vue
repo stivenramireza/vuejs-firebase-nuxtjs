@@ -1,6 +1,9 @@
 <template>
 <div>
   <h1>Tasks List</h1>
+  <router-link :to="{ name: 'add' }">
+    <button>Add</button>
+  </router-link>
   <ul>
     <li v-for="item of tasks" :key="item.id">
       {{ item.id }} - {{ item.name }}
