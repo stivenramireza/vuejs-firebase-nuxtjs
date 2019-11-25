@@ -9,16 +9,22 @@ export default new Vuex.Store({
     tasks: []
   },
   mutations: {
+    setTasks(state, tasks){
+      state.tasks = tasks
+    }
   },
   actions: {
     getTasks({commit}){
+      const tasks = []
       db.collection('tasks').get()
       .then(snapshot => {
         snapshot.forEach( doc => {
-          console.log(doc.id)
-          console.log(doc.data())
+          let task = doc.data()
+          task.id = doc.id
+          tasks.push(task)
         })
       })
+      commit('setTasks', tasks)
     }
   },
   modules: {
