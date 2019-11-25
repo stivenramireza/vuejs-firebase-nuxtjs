@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{name:'inicio'}" v-if="existeUsuario">Inicio</router-link> |
-      <router-link :to="{name:'registro'}" v-if="!existeUsuario">Registro</router-link> |
-      <router-link :to="{name:'ingreso'}" v-if="!existeUsuario">Ingreso</router-link> |
-      <a @click="cerrarSesion" v-if="existeUsuario">Cerrar Sesión</a>
+      <router-link :to="{name:'home'}" v-if="existUser">Home</router-link> |
+      <router-link :to="{name:'register'}" v-if="!existUser">Register</router-link> |
+      <router-link :to="{name:'login'}" v-if="!existUser">Login</router-link> |
+      <a @click="logout" v-if="existUser">Sign Out</a>
     </div>
     <router-view/>
   </div>
@@ -15,10 +15,10 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: 'App',
   methods:{
-    ...mapActions(['cerrarSesion'])
+    ...mapActions(['logout'])
   },
   computed:{
-    ...mapGetters(['existeUsuario'])
+    ...mapGetters(['existUser'])
   }
 }
 </script>

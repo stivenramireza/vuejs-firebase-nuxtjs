@@ -1,16 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router from './router/index'
+import store from './store/index'
 
 var firebase = require("firebase/app");
-
-// Add additional services that you want to use
 require("firebase/auth");
 // require("firebase/database");
-// require("firebase/firestore");
-// require("firebase/messaging");
-// require("firebase/functions");
 
 var config = {
   apiKey: "AIzaSyAseMe72xm1BI7ICtpCfkwpfy9DOmGlvcs",
@@ -28,9 +23,9 @@ Vue.config.productionTip = false
 firebase.auth().onAuthStateChanged((user)=>{
   console.log(user);
   if(user){
-    store.dispatch('detectarUsuario',{email: user.email, uid: user.uid})
+    store.dispatch('detectUser',{email: user.email, uid: user.uid})
   }else{
-    store.dispatch('detectarUsuario', null)
+    store.dispatch('detectUser', null)
   }
 
   new Vue({
@@ -40,7 +35,3 @@ firebase.auth().onAuthStateChanged((user)=>{
   }).$mount('#app')
   
 })
-
-
-
-
