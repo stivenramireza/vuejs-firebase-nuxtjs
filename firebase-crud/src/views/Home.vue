@@ -10,6 +10,7 @@
       <router-link :to="{name: 'update', params: { id: item.id}}">
         <button>Update</button>
       </router-link>
+      <button @click="deleteTask(item.id)">Delete</button>
     </li>
   </ul>
 </div>
@@ -20,7 +21,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Home',
   methods: {
-    ...mapActions(['getTasks'])
+    ...mapActions(['getTasks', 'deleteTask'])
   },
   created(){
     this.getTasks()
