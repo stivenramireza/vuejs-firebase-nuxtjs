@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index'
-import undefined from 'firebase/empty-import'
 var firebase = require('firebase/app')
 
 Vue.use(Vuex)
