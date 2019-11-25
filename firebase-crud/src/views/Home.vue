@@ -2,15 +2,21 @@
 <div>
   <h1>Tasks List</h1>
   <router-link :to="{ name: 'add' }">
-    <button>Add</button>
+    <button class="btn btn-success btn-block">Add</button>
   </router-link>
-  <ul>
-    <li v-for="item of tasks" :key="item.id">
+  <ul class="list-group mt-5">
+    <li class="list-group-item"
+    v-for="item of tasks" :key="item.id">
       {{ item.id }} - {{ item.name }}
-      <router-link :to="{name: 'update', params: { id: item.id}}">
-        <button>Update</button>
-      </router-link>
-      <button @click="deleteTask(item.id)">Delete</button>
+      <div class="float-right">
+        <router-link class="btn btn-warning btn-sm mr-2"
+        :to="{name: 'update', params: { id: item.id}}">
+          Update
+        </router-link>
+        <button @click="deleteTask(item.id)"
+          class="btn btn-danger btn-sm"
+        >Delete</button>
+      </div>
     </li>
   </ul>
 </div>

@@ -2,9 +2,14 @@
     <div>
         <h1>Update</h1>
         {{ id }} - {{ task }}
-        <form @submit.prevent="updateTask(task)">
-            <input type="text" v-model="task.name">
-            <button type="submit">Update</button>
+        <form @submit.prevent="updateTask(task)" class="form-inline">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                <div class="input-group-text">Name</div>
+                </div>
+                <input type="text" class="form-control" v-model="task.name">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Update</button>
         </form>
     </div>
 </template>
