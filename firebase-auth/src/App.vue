@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" class="container mt-5">
     <div id="nav">
-      <router-link :to="{name:'home'}" v-if="existUser">Home</router-link> |
-      <router-link :to="{name:'register'}" v-if="!existUser">Register</router-link> |
-      <router-link :to="{name:'login'}" v-if="!existUser">Login</router-link> |
-      <a @click="logout" v-if="existUser">Sign Out</a>
+      <router-link :to="{name:'home'}" v-if="existUser" class="btn btn-primary mx-2">
+        Home
+      </router-link>
+      <router-link :to="{name:'register'}" v-if="!existUser" class="btn btn-primary mx-2">Register</router-link>
+      <router-link :to="{name:'login'}" v-if="!existUser" class="btn btn-primary mx-2">Login</router-link>
+      <a @click="logout" v-if="existUser" class="btn btn-danger mx-2">Sign Out</a>
     </div>
     <router-view/>
   </div>
@@ -25,7 +27,7 @@ export default {
 
 
 <style>
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,5 +45,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
