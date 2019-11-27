@@ -5,7 +5,7 @@ import store from './store/index'
 
 var firebase = require("firebase/app");
 require("firebase/auth");
-// require("firebase/database");
+require("firebase/firestore");
 
 var config = {
   apiKey: "AIzaSyAseMe72xm1BI7ICtpCfkwpfy9DOmGlvcs",
@@ -16,7 +16,9 @@ var config = {
   messagingSenderId: "1065038021",
   appId: "1:1065038021:web:75cfd7b38bef850b3e00ac"
 };
-firebase.initializeApp(config);
+const firebaseApp = firebase.initializeApp(config);
+firebaseApp.firestore().settings({})
+export default firebaseApp.firestore()
 
 Vue.config.productionTip = false
 
