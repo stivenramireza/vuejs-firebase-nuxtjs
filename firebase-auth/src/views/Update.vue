@@ -7,14 +7,24 @@
                 <div class="input-group-prepend">
                 <div class="input-group-text">Name</div>
                 </div>
-                <input type="text" class="form-control" v-model="task.name">
+                <input type="text" class="form-control" v-model="$v.task.name.$model">
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Update</button>
+            <button 
+                type="submit" 
+                class="btn btn-primary mb-2"
+                :disabled="$v.$invalid || load"
+            >
+                Update
+            </button>
         </form>
+        <small class="text-danger d-block" v-if="!$v.task.name.required">Field is required</small>
+        <small class="text-danger d-block" v-if="!$v.task.name.minLength">Minimum 5 characters</small>
+        {{ $v.task.name }}
     </div>
 </template>
 
 <script>
+import { required, minLength } from 'vuelidate/lib/validators'
 import { mapActions, mapState } from 'vuex'
 export default {
     name: 'Update',
@@ -30,7 +40,12 @@ export default {
         this.getTask(this.id)
     },
     computed: {
-        ...mapState(['task'])
+        ...mapState(['task', 'load'])
+    },
+    validations: {
+        task: {
+            name: { required, minLength: minLength(5) }
+        }
     }
 }
 </script>

@@ -41,6 +41,8 @@ export default new Vuex.Store({
   },
   actions: {
     createUser({commit}, payload){
+      commit('loadFirebase', true)
+
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(res => {
         commit('setUser', {email: res.user.email, uid: res.user.uid})
@@ -51,20 +53,24 @@ export default new Vuex.Store({
         })
         .then(() => {
           router.push({name: 'home'})
+          commit('loadFirebase', false)
         })
       })
       .catch(err => {
-        commit('setError', err.message)
+        commit('setError', err.code) 
       })
     },
     loginUser({commit}, payload){
+      commit('loadFirebase', true)
+
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(res => {
         commit('setUser', {email: res.user.email, uid: res.user.uid})
         router.push({name: 'home'})
+        commit('loadFirebase', false)
       })
       .catch(err => {
-        commit('setError', err.message) 
+        commit('setError', err.code) 
       })
     },
     detectUser({commit}, payload){
@@ -91,9 +97,7 @@ export default new Vuex.Store({
           task.id = doc.id
           tasks.push(task)
         })
-        setTimeout(() => {
-          commit('loadFirebase', false)
-        }, 2000);
+        commit('loadFirebase', false)
       })
       commit('setTasks', tasks)
     },
@@ -107,21 +111,25 @@ export default new Vuex.Store({
       })
     },
     updateTask({commit}, task){
+      commit('loadFirebase', true)
       const user = firebase.auth().currentUser
       db.collection(user.email).doc(task.id).update({
         name: task.name
       })
       .then(() => {
         router.push({ name: 'home' })
+        commit('loadFirebase', false)
       })
     },
     addTask({commit}, name){
+      commit('loadFirebase', true)
       const user = firebase.auth().currentUser
       db.collection(user.email).add({
         name: name
       })
       .then(doc => {
         router.push({ name: 'home' })
+        commit('loadFirebase', false)
       })
     },
     deleteTask({commit}, id){
