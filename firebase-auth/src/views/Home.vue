@@ -5,6 +5,16 @@
     <button class="btn btn-success btn-block">Add</button>
   </router-link>
 
+  <form @submit.prevent="search(text)">
+    <input 
+      type="text" 
+      placeholder="Search..."
+      class="form-control my-2"
+      v-model="text"
+      v-on:keyup="search(text)"
+    >
+  </form>
+
   <div v-if="load" class="text-center mt-5">
     <h3>Loading content...</h3>
     <pulse-loader
@@ -15,7 +25,7 @@
 
   <ul class="list-group mt-5" v-if="!load">
     <li class="list-group-item"
-    v-for="item of tasks" :key="item.id">
+    v-for="item of filteredArray" :key="item.id">
       {{ item.id }} - {{ item.name }}
       <div class="float-right">
         <router-link class="btn btn-warning btn-sm mr-2"
@@ -32,15 +42,21 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
   name: 'Home',
+  data(){
+    return {
+      text: ''
+    }
+  },
   computed:{
-    ...mapState(['user', 'tasks', 'load'])
+    ...mapState(['user', 'tasks', 'load']),
+    ...mapGetters(['filteredArray'])
   },
   methods: {
-    ...mapActions(['getTasks', 'deleteTask'])
+    ...mapActions(['getTasks', 'deleteTask', 'search'])
   },
   created(){
     this.getTasks()

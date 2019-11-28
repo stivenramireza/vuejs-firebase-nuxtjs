@@ -15,7 +15,8 @@ export default new Vuex.Store({
       name: '',
       id: ''
     },
-    load: false
+    load: false,
+    text: ''
   },
   mutations: {
     setUser(state, payload){
@@ -40,6 +41,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    search({commit, state}, payload){
+      console.log(payload)
+      state.text = payload.toLowerCase()
+    },
     createUser({commit}, payload){
       commit('loadFirebase', true)
 
@@ -147,6 +152,16 @@ export default new Vuex.Store({
       }else{
         return true
       }
+    },
+    filteredArray(state){
+      let filteredArray = []
+      for(let task of state.tasks){
+        let name = task.name.toLowerCase()
+        if(name.indexOf(state.text) >= 0){
+          filteredArray.push(task)
+        }
+      }
+      return filteredArray
     }
   }
 })
