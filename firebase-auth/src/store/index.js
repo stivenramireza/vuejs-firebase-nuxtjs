@@ -14,7 +14,8 @@ export default new Vuex.Store({
     task: {
       name: '',
       id: ''
-    }
+    },
+    load: false
   },
   mutations: {
     setUser(state, payload){
@@ -33,6 +34,9 @@ export default new Vuex.Store({
       state.tasks = state.tasks.filter( doc => {
         return doc.id != id
       })
+    },
+    loadFirebase(state, payload){
+      state.load = payload
     }
   },
   actions: {
@@ -76,6 +80,8 @@ export default new Vuex.Store({
       router.push({name: 'login'})
     },
     getTasks({commit}){
+      commit('loadFirebase', true)
+
       const user = firebase.auth().currentUser
       const tasks = []
       db.collection(user.email).get()
@@ -85,6 +91,9 @@ export default new Vuex.Store({
           task.id = doc.id
           tasks.push(task)
         })
+        setTimeout(() => {
+          commit('loadFirebase', false)
+        }, 2000);
       })
       commit('setTasks', tasks)
     },

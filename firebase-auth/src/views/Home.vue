@@ -4,7 +4,16 @@
   <router-link :to="{ name: 'add' }">
     <button class="btn btn-success btn-block">Add</button>
   </router-link>
-  <ul class="list-group mt-5">
+
+  <div v-if="load" class="text-center mt-5">
+    <h3>Loading content...</h3>
+    <pulse-loader
+      :loading="load"
+    >
+    </pulse-loader>
+  </div>
+
+  <ul class="list-group mt-5" v-if="!load">
     <li class="list-group-item"
     v-for="item of tasks" :key="item.id">
       {{ item.id }} - {{ item.name }}
@@ -24,16 +33,20 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
   name: 'Home',
   computed:{
-    ...mapState(['user', 'tasks'])
+    ...mapState(['user', 'tasks', 'load'])
   },
   methods: {
     ...mapActions(['getTasks', 'deleteTask'])
   },
   created(){
     this.getTasks()
+  },
+  components: {
+    PulseLoader
   }
 }
 </script>
